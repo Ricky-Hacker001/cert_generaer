@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Enter Certificate Details</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="count">Number of Certificates</label>
+                <input type="number" class="form-control" id="count" name="count" required>
+            </div>
+            <div class="form-group">
+                <label for="template">Template File</label>
+                <input type="file" class="form-control-file" id="template" name="template" accept=".docx" required>
+            </div>
+            <div id="students-container"></div>
+            <button type="button" class="btn btn-secondary" onclick="addStudentFields()">Add Student</button>
+            <button type="submit" class="btn btn-primary">Generate Certificates</button>
+        </form>
+    </div>
+    <script>
+        let studentCount = 0;
+
+        function addStudentFields() {
+            const container = document.getElementById('students-container');
+
+            const studentDiv = document.createElement('div');
+            studentDiv.classList.add('student-fields');
+
+            studentDiv.innerHTML = `
+                <hr>
+                <h4>Student ${studentCount + 1}</h4>
+                <div class="form-group">
+                    <label for="student_name_${studentCount}">Student Name</label>
+                    <input type="text" class="form-control" id="student_name_${studentCount}" name="student_name_${studentCount}" required>
+                </div>
+                <div class="form-group">
+                    <label for="course_${studentCount}">Course</label>
+                    <input type="text" class="form-control" id="course_${studentCount}" name="course_${studentCount}" required>
+                </div>
+                <div class="form-group">
+                    <label for="college_name_${studentCount}">College Name</label>
+                    <input type="text" class="form-control" id="college_name_${studentCount}" name="college_name_${studentCount}" required>
+                </div>
+                <div class="form-group">
+                    <label for="college_location_${studentCount}">College Location</label>
+                    <input type="text" class="form-control" id="college_location_${studentCount}" name="college_location_${studentCount}" required>
+                </div>
+                <div class="form-group">
+                    <label for="internship_domain_${studentCount}">Internship Domain</label>
+                    <input type="text" class="form-control" id="internship_domain_${studentCount}" name="internship_domain_${studentCount}" required>
+                </div>
+                <div class="form-group">
+                    <label for="start_date_${studentCount}">Start Date (YYYY-MM-DD)</label>
+                    <input type="date" class="form-control" id="start_date_${studentCount}" name="start_date_${studentCount}" required>
+                </div>
+                <div class="form-group">
+                    <label for="end_date_${studentCount}">End Date (YYYY-MM-DD)</label>
+                    <input type="date" class="form-control" id="end_date_${studentCount}" name="end_date_${studentCount}" required>
+                </div>
+                <div class="form-group">
+                    <label for="print_date_${studentCount}">Print Date (e.g., June 22nd, 2024)</label>
+                    <input type="text" class="form-control" id="print_date_${studentCount}" name="print_date_${studentCount}" required>
+                </div>
+            `;
+
+            container.appendChild(studentDiv);
+            studentCount++;
+        }
+    </script>
+</body>
+</html>

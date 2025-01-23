@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Certificate Generator</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-success" role="alert">
+            {{ messages[0] }}
+          </div>
+        {% endif %}
+        {% endwith %}
+        <div class="text-center">
+            <a href="{{ url_for('form') }}" class="btn btn-primary">Create Certificates</a>
+        </div>
+    </div>
+</body>
+</html>
